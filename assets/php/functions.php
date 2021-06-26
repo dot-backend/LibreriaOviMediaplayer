@@ -7,12 +7,14 @@ class ReadFolder
 
     private $struct;
     private $dir;
+    private $dirRelativa;
     private $extent;
     private $number_dir = 0;
 
     function __construct($_dir)
     {
         $this->dir = $_dir;
+        $this->dirRelativa = "../../".$_dir;
     }
 
     /**
@@ -21,13 +23,13 @@ class ReadFolder
      */
     public function build()
     {
-        if (is_dir($this->dir)) {
-            if ($dh = opendir($this->dir)) {
+        if (is_dir($this->dirRelativa)) {
+            if ($dh = opendir($this->dirRelativa)) {
                 while (($namefile = readdir($dh)) !== false) {
                     if ($namefile != "." && $namefile != "..") {
                         $this->struct[] = array("folder" => $namefile);
                         $is_folder = $this->struct[$this->number_dir]["folder"];
-                        if (is_dir($this->dir . "/" . $is_folder)) {
+                        if (is_dir($this->dirRelativa . "/" . $is_folder)) {
                             $this->struct($this->number_dir);
                         }
                         $this->number_dir++;
@@ -47,7 +49,7 @@ class ReadFolder
     public function struct($i = null)
     {
         if (!is_null($i)) {
-            if ($dh = opendir($this->dir . "/" . $this->struct[$i]["folder"])) {
+            if ($dh = opendir($this->dirRelativa . "/" . $this->struct[$i]["folder"])) {
                 while (($namefile = readdir($dh)) !== false) {
                     if ($namefile !== "." && $namefile !== "..") {
                         $info = new SplFileInfo($namefile);
