@@ -29,7 +29,6 @@ const ovimediaplayer = {
 </body>
 ...
 ```
-![Image text](https://github.com/DiegoOviedoT/OviMediaPlayer/blob/main/assets/instrucciones.gif)
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
